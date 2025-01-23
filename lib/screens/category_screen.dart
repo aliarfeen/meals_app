@@ -9,18 +9,24 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          toolbarHeight: MediaQuery.of(context).size.height * .1,
-          backgroundColor: Colors.black,
-          elevation: 10,
-          shadowColor: Colors.red,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
+          ),
+          toolbarHeight: MediaQuery.of(context).size.height * .13,
+          backgroundColor: Colors.black87,
+          elevation: 2,
+          shadowColor: Colors.white,
           centerTitle: true,
           title: const Text(
-            "Meals Categories",
-            style: TextStyle(color: Colors.amberAccent),
+            "Choose a category",
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
         body: GridView(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 3 / 2,
@@ -30,6 +36,7 @@ class CategoriesScreen extends StatelessWidget {
             children:
                 //  [availableCategories.map((Category) => CategoryGridItem(category: Category)).toList()]
                 [
+              // ignore: non_constant_identifier_names
               for (final Category in availableCategories)
                 CategoryGridItem(category: Category)
             ]));
