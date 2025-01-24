@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/dummy_data.dart';
 import 'package:meals_app/screens/category_screen.dart';
-import 'package:meals_app/screens/meal_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,6 +20,6 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.dark, seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: MealScreen(title: 'title', meals: dummyMeals));
+        home: const CategoriesScreen());
   }
 }

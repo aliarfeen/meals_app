@@ -16,6 +16,10 @@ class MealScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+            title: Text(
+          title,
+        )),
         body: meals.isEmpty
             ? Center(
                 child: Text('Oops..look for another category'),
