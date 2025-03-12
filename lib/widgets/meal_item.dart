@@ -49,7 +49,7 @@ class MealItem extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Container(
-                    color: Colors.black38,
+                    color: Colors.black54,
                     padding: EdgeInsets.all(5),
                     child: Column(
                       children: [
@@ -59,6 +59,7 @@ class MealItem extends StatelessWidget {
                           textAlign: TextAlign.center,
                           softWrap: false,
                           overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: Colors.white),
                         ),
                         SizedBox(
                           height: 16,

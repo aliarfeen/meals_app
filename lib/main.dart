@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/data/consts.dart';
 import 'package:meals_app/screens/category_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meals_app/screens/tabs_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,10 +19,21 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'Quintessential',
-          colorScheme: ColorScheme.fromSeed(
-              brightness: Brightness.dark, seedColor: Colors.deepPurple),
+          scaffoldBackgroundColor: AppColors.bgColor,
+          colorScheme: const ColorScheme.light(
+            onPrimary: AppColors.hColor,
+            primary: AppColors.hColor,
+            secondary: AppColors.secondaryColor,
+            background: AppColors.bgColor,
+          ),
+          appBarTheme: const AppBarTheme(
+            backgroundColor:
+                AppColors.hColor, // Explicitly setting AppBar color
+            foregroundColor: Colors.white, // Ensuring icons & text are visible
+          ),
+          textTheme: TextTheme(),
           useMaterial3: true,
         ),
-        home: const CategoriesScreen());
+        home: TabsScreen());
   }
 }
