@@ -11,7 +11,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,9 +26,8 @@ class MyApp extends StatelessWidget {
             background: AppColors.bgColor,
           ),
           appBarTheme: const AppBarTheme(
-            backgroundColor:
-                AppColors.hColor, // Explicitly setting AppBar color
-            foregroundColor: Colors.white, // Ensuring icons & text are visible
+            backgroundColor: AppColors.hColor,
+            foregroundColor: Colors.white,
           ),
           textTheme: TextTheme(),
           useMaterial3: true,
