@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals_app/data/dummy_data.dart';
 import 'package:meals_app/models/category.dart';
 import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/providers/filters_provider.dart';
 import 'package:meals_app/providers/meals_provider.dart';
 import 'package:meals_app/screens/meal_screen.dart';
 import 'package:meals_app/widgets/cat_grid_item.dart';
@@ -19,9 +20,22 @@ class CategoriesScreen extends ConsumerStatefulWidget {
 class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
   void _selectCategory(BuildContext context, Category category) {
     final dummyMeals = ref.watch(mealsProvider);
-    final List<Meal> filteredList = dummyMeals
-        .where((meal) => meal.categories.contains(category.id))
-        .toList();
+    final avilableMeals = ref.watch(filtersProvider);
+    final List<Meal> filteredList = dummyMeals.where((meal) {
+      if (avilableMeals[Filters.isGlutenFree]! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (avilableMeals[Filters.isVegan]! && !meal.isVegan) {
+        return false;
+      }
+      if (avilableMeals[Filters.isVegetarian]! && !meal.isVegetarian) {
+        return false;
+      }
+      if (avilableMeals[Filters.isLactoseFree]! && !meal.isLactoseFree) {
+        return false;
+      }
+      return meal.categories.contains(category.id);
+    }).toList();
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -32,9 +46,11 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:
-            RoundedAppbar(appBarTitle: 'select a category', context: context),
-        drawer: MainDrawer(),
+        appBar: RoundedAppbar(
+          appBarTitle: 'select a category'.toUpperCase(),
+          context: context,
+        ),
+        drawer: const MainDrawer(),
         body: GridView(
             padding: const EdgeInsets.all(16),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

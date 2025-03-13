@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals_app/data/consts.dart';
+import 'package:meals_app/providers/filters_provider.dart';
 import 'package:meals_app/screens/filtters_screen.dart';
 
-class MainDrawer extends StatelessWidget {
+class MainDrawer extends ConsumerStatefulWidget {
   const MainDrawer({super.key});
+
+  @override
+  ConsumerState<MainDrawer> createState() => _MainDrawerState();
+}
+
+class _MainDrawerState extends ConsumerState<MainDrawer> {
+  var _isGlutenFree = false;
+  var _isvegan = false;
+  var _isVegetarian = false;
+  var _isLactoseFree = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final activeFilters = ref.read(filtersProvider);
+    _isGlutenFree = activeFilters[Filters.isGlutenFree]!;
+    _isvegan = activeFilters[Filters.isVegan]!;
+    _isVegetarian = activeFilters[Filters.isVegetarian]!;
+    _isLactoseFree = activeFilters[Filters.isLactoseFree]!;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,37 +54,105 @@ class MainDrawer extends StatelessWidget {
                     width: 30,
                   ),
                   Text(
-                    'Meals App',
-                    style: TextStyle(color: Colors.white, fontSize: 35),
+                    'Your Meal \nYour Choice',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ],
               )),
-          ListTile(
-            leading: Icon(
-              Icons.restaurant,
-              size: 35,
-            ),
-            title: Text(
-              'Meals',
-              style: TextStyle(fontSize: 30),
-            ),
-            onTap: () {},
+          Column(
+            children: [
+              SwitchListTile(
+                title: const Text(
+                  'Gluten-free',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                subtitle: const Text('Only include gluten-free meals'),
+                value: _isGlutenFree,
+                activeColor: AppColors.hColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    _isGlutenFree = newValue;
+                  });
+                },
+              ),
+              SwitchListTile(
+                title: const Text(
+                  'Lactose-Free',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                subtitle: const Text('Only include lactose-free meals'),
+                value: _isLactoseFree,
+                activeColor: AppColors.hColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    _isLactoseFree = newValue;
+                  });
+                },
+              ),
+              SwitchListTile(
+                title: const Text(
+                  'Vegan',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                subtitle: const Text('Only include vegan meals'),
+                value: _isvegan,
+                activeColor: AppColors.hColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    _isvegan = newValue;
+                  });
+                },
+              ),
+              SwitchListTile(
+                title: const Text(
+                  'Vegetarian',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                subtitle: const Text('Only include vegetarian meals'),
+                value: _isVegetarian,
+                activeColor: AppColors.hColor,
+                onChanged: (newValue) {
+                  setState(() {
+                    _isVegetarian = newValue;
+                  });
+                },
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .24,
+              ),
+              Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(right: 15),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.all(20),
+                          foregroundColor:
+                              Colors.white, // Change the text color here
+                          backgroundColor: AppColors
+                              .hColor, // Change the background color here
+                        ),
+                        onPressed: () async {
+                          ref.read(filtersProvider.notifier).setFilters({
+                            Filters.isGlutenFree: _isGlutenFree,
+                            Filters.isVegan: _isvegan,
+                            Filters.isVegetarian: _isVegetarian,
+                            Filters.isLactoseFree: _isLactoseFree,
+                          });
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text(
+                          'Apply Filters',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    )
+                  ])
+            ],
           ),
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              size: 35,
-            ),
-            title: Text(
-              'Filters',
-              style: TextStyle(fontSize: 30),
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => FiltterScreen()));
-            },
-          )
         ],
       ),
     );

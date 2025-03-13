@@ -39,9 +39,13 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
         selectedItemColor: AppColors.secondaryColor,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(Icons.category_outlined), label: 'category'),
+            icon: Icon(Icons.category_outlined),
+            label: 'category'.toUpperCase(),
+          ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.star_outline), label: 'favorites'),
+            icon: Icon(Icons.star_outline),
+            label: 'favorites'.toUpperCase(),
+          ),
         ],
       ),
     );

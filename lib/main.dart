@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/data/consts.dart';
-import 'package:meals_app/screens/category_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals_app/screens/tabs_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         title: 'Meals App',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          fontFamily: 'Quintessential',
+          primaryTextTheme: GoogleFonts.interTightTextTheme(),
           scaffoldBackgroundColor: AppColors.bgColor,
           colorScheme: const ColorScheme.light(
             onPrimary: AppColors.hColor,

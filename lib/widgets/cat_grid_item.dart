@@ -31,7 +31,7 @@ class CategoryGridItem extends StatelessWidget {
         child: Text(
           category.title,
           style: TextStyle(
-              fontSize: 18,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
               color: const Color.fromARGB(221, 255, 255, 255)),
         ),
