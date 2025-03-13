@@ -118,7 +118,7 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
                 },
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * .24,
+                height: MediaQuery.of(context).size.height * .2,
               ),
               Row(
                   mainAxisSize: MainAxisSize.max,
