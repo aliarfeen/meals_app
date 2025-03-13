@@ -125,7 +125,7 @@ class _MainDrawerState extends ConsumerState<MainDrawer> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right: 15),
+                      margin: const EdgeInsets.only(right: 15, bottom: 15),
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.all(20),
